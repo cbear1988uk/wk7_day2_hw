@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BrewDog API</title>
+	<script src="./js/bundle.js"></script>
+</head>
+<body>
+
+	<h1>BrewDog</h1>
+
+	<div id="app">
+		<label for="beer_select">Select a Beer:</label>
+		<select  v-on:change="beerSelect" id="beer_select" v-model="selectedBeerIndex">
+			<option disable value>Select a beer..</option>
+			<option v-for="(beer, index) in beers" :value="index">{{beer.name}}</option>
+		</select>
+
+		<div id="selected_beer" v-if="selectedBeer">
+			<h2>{{selectedBeer.name}}</h2>
+			<img style="height: 175px" :src="selectedBeer.image_url">
+			<p>{{selectedBeer.description}}</p>
+			<p v-for="ingredient in ingredients">{{selectedBeer.ingredients}}</p>
+			<button v-on:click="addToFavourites">Add Beer</button>
+		</div>
+
+		<div v-for="(beer, index) in favouritedBeers" id="favourited_beers">
+			<h4>Favourite Beers</h4>
+			<ul>
+				<li>{{beer.name}}</li>
+				<button v-on:click="removeBeer(index)">Delete Beer</button>
+			</ul>
+		</div>
+
+	</div>
+</body>
+</html>
